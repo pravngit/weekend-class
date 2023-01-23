@@ -1,30 +1,25 @@
-node
-{
-    stage "1. update the system"
-    sh "yum update -y"
-    sh "ls -al"
-    
-    stage "2. install the packages"
-    sh "yum install -y httpd"
-    
-    stage "3.verify the packages installed or not"
-    sh "rpm -qa | grep httpd"
-    
-    stage "4. restart the services"
-    sh "systemctl restart httpd"
-    
-    stage "5. enable the services"
-    sh "systemctl enable httpd"
-    
-    stage "6. check the services status"
-    sh "systemctl status httpd"
-    
-    stage "7. view the date"
-    sh "date"
-    
-    stage "8. get inside folder"
-    sh "cd /var/www/html/"
-    writeFile(file: "/var/www/html/index.html", text: "this test data and test website", encoding: "UTF-8") 
-    
+pipeline {
+    agent any 
+    stages {
+        stage ("1. fetch current folder path") {
+            steps {
+                sh "pwd"
+                
+            }
+        }
+         stage ("2. Create folder name called praveen") {
+            steps {
+                sh "mkdir praveen"
+		sh "cd praveen"
+              
+            }
+        }
+        stage ("3. create file under praveen folder") {
+            steps {
+                sh "touch file2.txt"
+                
+            }
+        }
+        
+    }
 }
-
